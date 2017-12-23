@@ -18,29 +18,34 @@ file_extns = {"text":('.DOC','.DOCX','.LOG','.MSG','.ODT','.PAGES','.RTF','.TEX'
 "codes":('.C','.CLASS','.CPP','.CS','.DTD','.FLA','.H','.JAVA','.LUA','.M','.PL','.PY','.SH','.SLN','.SWIFT','.VB','.VCXPROJ','.XCODEPROJ')
 }
 
+#default path is current directory as of now
+PATH = "./"
+
 # def advance_cleaning():
     #ToDO
 
-# def cleaning():
-files_dir_list = os.listdir()
-for element in files_dir_list:
-    if(os.path.isfile(element)):
-        flag = False
-        ext_list = element.split('.')
-        ext = '.' + ext_list[len(ext_list)-1]
-        for key,value in file_extns.items():
-            if ext.upper() in file_extns[key]:
-                flag = True
-                if(os.path.isdir(key)):
-                    os.rename('./'+element,'./'+key+'/'+element)
-                    break
+def cleaning():
+    files_dir_list = os.listdir(PATH)
+    for element in files_dir_list:
+        if(os.path.isfile(element)):
+            flag = False
+            ext_list = element.split('.')
+            ext = '.' + ext_list[len(ext_list)-1]
+            for key,value in file_extns.items():
+                if ext.upper() in file_extns[key]:
+                    flag = True
+                    if(os.path.isdir(key)):
+                        os.rename(PATH+element,PATH+key+'/'+element)
+                        break
+                    else:
+                        os.mkdir(key)
+                        os.rename(PATH+element,PATH+key+'/'+element)
+                        break
+            if(not flag):
+                if(os.path.isdir('others')):
+                    os.rename(PATH+element,PATH+'others/'+element)
                 else:
-                    os.mkdir(key)
-                    os.rename('./'+element,'./'+key+'/'+element)
-                    break
-        if(not flag):
-            if(os.path.isdir('others')):
-                os.rename('./'+element,'./'+'others/'+element)
-            else:
-                os.mkdir('others')
-                os.rename('./'+element,'./'+'others/'+element)
+                    os.mkdir('others')
+                    os.rename(PATH+element,PATH+'others/'+element)
+
+cleaning()
