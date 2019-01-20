@@ -1,0 +1,6 @@
+Author: Saquib Rais
+Download youtube videos directly with google like search queries
+
+Install ffmpeg for audio formatting. It can be direclty installed using your OS default package manager
+i.e.,
+apt-get install ffmpeg   #On my Ubuntu machine
