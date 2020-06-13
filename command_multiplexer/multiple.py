@@ -24,7 +24,6 @@ def main():
     #Enter the pane number on which you want to run this command
     #You can get pane number using ctrl+b q
     pane_list = get_list_of_panes()
-    print(pane_list)
     for item in pane_list:
         os.system("tmux send-keys -t " + str(item) +  " '" + " ".join(sys.argv[1:]) + "' C-m")
 
